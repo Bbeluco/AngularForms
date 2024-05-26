@@ -26,6 +26,12 @@
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="email">E-mail</label>
       <input formControlName="email" id="email" type="email" class="campo__escrita"/>
+      <span class="erro__texto" *ngIf="formulario.controls['email']?.errors?.['required'] && formulario.controls['email']?.touched">
+        Email eh um campo obrigatorio
+      </span>
+      <span class="erro__texto" *ngIf="formulario.controls['email']?.errors?.['email'] && formulario.controls['email']?.touched">
+        O campo de email deve seguir este padrão: "exemplo@dominio.com"
+      </span>
     </div>
 
 

@@ -12,13 +12,16 @@ export class CadastroComponent implements OnInit {
   constructor(private router: Router) { }
 
   formulario = new FormGroup({
-    nome: new FormControl('', [
+    nome: new FormControl('', Validators.compose([
       Validators.required,
       Validators.minLength(3)
-    ]),
+    ])),
     nascimento: new FormControl(''),
     telefone: new FormControl(''),
-    email: new FormControl(''),
+    email: new FormControl('', Validators.compose([
+      Validators.required,
+      Validators.email
+    ])),
     cep: new FormControl(''),
     endereco: new FormControl(''),
     numero: new FormControl(''),
