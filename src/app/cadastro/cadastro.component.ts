@@ -17,7 +17,10 @@ export class CadastroComponent implements OnInit {
       Validators.minLength(3)
     ])),
     nascimento: new FormControl(''),
-    telefone: new FormControl(''),
+    telefone: new FormControl('', Validators.compose([
+      Validators.required,
+      Validators.pattern(/(\(?\d{2}\)?\s?)(\d{5}\-?\d{4})/)
+    ])),
     email: new FormControl('', Validators.compose([
       Validators.required,
       Validators.email

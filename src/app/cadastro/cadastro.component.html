@@ -21,6 +21,12 @@
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="telefone">Contato</label>
         <input formControlName="telefone" id="telefone" type="tel" placeholder="(XX) XXXXX-XXXX" class="campo__escrita"/>
+        <span class="erro__texto" *ngIf="formulario.controls['telefone']?.errors?.['required'] && formulario.controls['telefone']?.touched">
+          telefone eh um campo obrigatorio
+        </span>
+        <span class="erro__texto" *ngIf="formulario.controls['telefone']?.errors?.['pattern'] && formulario.controls['telefone']?.touched">
+          O campo de telefone está faltando algo.
+        </span>
       </div>
     </div>
     <div class="formulario__campo">
