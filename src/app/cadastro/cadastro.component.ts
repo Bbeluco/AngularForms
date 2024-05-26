@@ -13,7 +13,8 @@ export class CadastroComponent implements OnInit {
 
   formulario = new FormGroup({
     nome: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.minLength(3)
     ]),
     nascimento: new FormControl(''),
     telefone: new FormControl(''),
@@ -33,6 +34,5 @@ export class CadastroComponent implements OnInit {
       if(this.formulario.status == "VALID") {
         this.router.navigate(['./sucesso'])
       }
-      console.log('Formulário enviado');
   }
 }

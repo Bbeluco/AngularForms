@@ -6,9 +6,12 @@
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="nome">Nome Completo</label>
       <input formControlName="nome" id="nome" class="campo__escrita">
-      <div *ngIf="formulario.value.nome?.length == 0 && formulario.controls['nome']?.touched">
-        <p>Nome eh um campo obrigatorio</p>
-      </div>
+      <span class="erro__texto" *ngIf="formulario.controls['nome']?.errors?.['required'] && formulario.controls['nome']?.touched">
+        Nome eh um campo obrigatorio
+      </span>
+      <span class="erro__texto" *ngIf="formulario.controls['nome']?.errors?.['minlength'] && formulario.controls['nome']?.touched">
+        Nome precisa de no minimo 3 caracteres
+      </span>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
