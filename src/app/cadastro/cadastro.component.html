@@ -48,7 +48,7 @@
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="cep">CEP</label>
-      <input formControlName="cep" id="cep" class="campo__escrita" />
+      <input formControlName="cep" id="cep" class="campo__escrita" (blur)="consultarCep()" validadorCep/>
       <div id="erro">
         <span class="erro__texto" *ngIf="formulario.controls['cep']?.errors?.['required'] && formulario.controls['cep']?.touched">
           O campo de CEP é obrigatório
@@ -56,17 +56,32 @@
         <span class="erro__texto" *ngIf="formulario.controls['cep']?.errors?.['pattern'] && formulario.controls['cep']?.touched">
           O campo de CEP deve seguir este exemplo: 00000-000
         </span>
+        <span class="erro__texto" *ngIf="formulario.controls['cep']?.errors?.['validadorCep'] && formulario.controls['cep']?.touched">
+          O CEP nao existe
+        </span>
       </div>
     </div>
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="endereco">Endereço</label>
       <input formControlName="endereco" id="endereco" class="campo__escrita" />
+      <span class="erro__texto" *ngIf="formulario.controls['endereco']?.errors?.['required'] && formulario.controls['endereco']?.touched">
+        O campo de endereco é obrigatório
+      </span>
+      <span class="erro__texto" *ngIf="formulario.controls['endereco']?.errors?.['minlength'] && formulario.controls['endereco']?.touched">
+        O campo endereco deve possuir no minimo 3 letras
+      </span>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="numero">Numero</label>
         <input formControlName="numero" id="numero" class="campo__escrita" />
+        <span class="erro__texto" *ngIf="formulario.controls['endereco']?.errors?.['required'] && formulario.controls['endereco']?.touched">
+          O campo de numero é obrigatório
+        </span>
+        <span class="erro__texto" *ngIf="formulario.controls['endereco']?.errors?.['minlength'] && formulario.controls['endereco']?.touched">
+          O campo numero deve possuir apenas numeros
+        </span>
       </div>
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="complemento">Complemento</label>
@@ -76,16 +91,22 @@
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="bairro">Bairro</label>
       <input formControlName="bairro" id="bairro" class="campo__escrita" />
+      <span class="erro__texto" *ngIf="formulario.controls['bairro']?.errors?.['required'] && formulario.controls['bairro']?.touched">
+        O campo de numero é obrigatório
+      </span>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="cidade">Cidade</label>
         <input formControlName="cidade" id="cidade" class="campo__escrita" />
+        <span class="erro__texto" *ngIf="formulario.controls['cidade']?.errors?.['required'] && formulario.controls['cidade']?.touched">
+          O campo de numero é obrigatório
+        </span>
       </div>
 
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="estado">UF</label>
-        <select id="estado" name="estado" class="campo__escrita">
+        <select id="estado" formControlName="estado" class="campo__escrita">
           <option value="AC">Acre</option>
           <option value="AL">Alagoas</option>
           <option value="AP">Amapá</option>

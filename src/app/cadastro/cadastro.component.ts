@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ConsultaCepService } from '../services/consulta-cep.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,7 +10,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class CadastroComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private consultaCepService: ConsultaCepService
+  ) { }
 
   formulario = new FormGroup({
     nome: new FormControl('', Validators.compose([
@@ -31,11 +35,18 @@ export class CadastroComponent implements OnInit {
       Validators.maxLength(9),
       Validators.pattern(/^(\d{5})(-?\d{3})$/)
     ])),
-    endereco: new FormControl(''),
-    numero: new FormControl(''),
+    endereco: new FormControl('', Validators.compose([
+      Validators.required,
+      Validators.minLength(3)
+    ])),
+    numero: new FormControl('', Validators.compose([
+      Validators.required,
+      Validators.pattern(/\d/)
+    ])),
     complemento: new FormControl(''),
-    bairro: new FormControl(''),
-    cidade: new FormControl('')
+    bairro: new FormControl('', Validators.required),
+    cidade: new FormControl('', Validators.required),
+    estado: new FormControl('')
   })
 
   ngOnInit(): void {
@@ -45,5 +56,15 @@ export class CadastroComponent implements OnInit {
       if(this.formulario.status == "VALID") {
         this.router.navigate(['./sucesso'])
       }
+  }
+
+  consultarCep() {
+    this.consultaCepService.getConsultaCEP(this.formulario.get('cep')?.value!).subscribe(r => {
+      
+      this.formulario.get('endereco')?.setValue(r.logradouro);
+      this.formulario.get('bairro')?.setValue(r.bairro);
+      this.formulario.get('cidade')?.setValue(r.localidade);
+      this.formulario.get('estado')?.setValue(r.uf);
+    })
   }
 }
