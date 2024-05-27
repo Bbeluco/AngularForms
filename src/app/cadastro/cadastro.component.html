@@ -16,7 +16,10 @@
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="nascimento">Nascimento</label>
-        <input formControlName="nascimento" id="nascimento" type="date" class="campo__escrita"/>
+        <input formControlName="nascimento" id="nascimento" type="date" class="campo__escrita" maiorIdadeValidator/>
+        <span class="erro__texto" *ngIf="formulario.controls['nascimento']?.errors?.['maiorIdadeValidator'] && formulario.controls['telefone']?.touched">
+          Usuario menor de idade
+        </span>
       </div>
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="telefone">Contato</label>

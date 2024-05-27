@@ -8,9 +8,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { SucessoCadastroComponent } from './sucesso-cadastro/sucesso-cadastro.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaiorIdadeDirective } from './directives/maior-idade.directive';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, CadastroComponent, SucessoCadastroComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, CadastroComponent, SucessoCadastroComponent, MaiorIdadeDirective],
   imports: [
     BrowserModule, 
     AppRoutingModule,

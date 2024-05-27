@@ -37,8 +37,9 @@ export class CadastroComponent implements OnInit {
   }
 
   cadastrar(){
-      if(this.formulario.status == "VALID") {
-        this.router.navigate(['./sucesso'])
-      }
+      // if(this.formulario.status == "VALID") {
+      //   this.router.navigate(['./sucesso'])
+      // }
+      this.formulario.controls['nascimento']?.errors
   }
 }
