@@ -49,7 +49,14 @@
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="cep">CEP</label>
       <input formControlName="cep" id="cep" class="campo__escrita" />
-      <div id="erro"></div>
+      <div id="erro">
+        <span class="erro__texto" *ngIf="formulario.controls['cep']?.errors?.['required'] && formulario.controls['cep']?.touched">
+          O campo de CEP é obrigatório
+        </span>
+        <span class="erro__texto" *ngIf="formulario.controls['cep']?.errors?.['pattern'] && formulario.controls['cep']?.touched">
+          O campo de CEP deve seguir este exemplo: 00000-000
+        </span>
+      </div>
     </div>
 
     <div class="formulario__campo">

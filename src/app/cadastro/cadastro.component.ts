@@ -25,7 +25,12 @@ export class CadastroComponent implements OnInit {
       Validators.required,
       Validators.email
     ])),
-    cep: new FormControl(''),
+    cep: new FormControl('', Validators.compose([
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(9),
+      Validators.pattern(/^(\d{5})(-?\d{3})$/)
+    ])),
     endereco: new FormControl(''),
     numero: new FormControl(''),
     complemento: new FormControl(''),
@@ -37,9 +42,8 @@ export class CadastroComponent implements OnInit {
   }
 
   cadastrar(){
-      // if(this.formulario.status == "VALID") {
-      //   this.router.navigate(['./sucesso'])
-      // }
-      this.formulario.controls['nascimento']?.errors
+      if(this.formulario.status == "VALID") {
+        this.router.navigate(['./sucesso'])
+      }
   }
 }
