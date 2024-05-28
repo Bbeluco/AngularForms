@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ListaDeCompraService } from 'src/app/service/lista-de-compra.service';
 
 @Component({
   selector: 'app-input',
@@ -6,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent implements OnInit {
+  input!: string;
+  constructor(private listaCompraService: ListaDeCompraService) { }
 
-  constructor() { }
+  ngOnInit(): void {
+  }
 
-  ngOnInit(): void { }
+  adicionarItem() {
+    this.listaCompraService.adicionarItemLista(this.input);
+  }
 }
