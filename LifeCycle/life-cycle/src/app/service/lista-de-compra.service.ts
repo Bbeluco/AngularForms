@@ -28,16 +28,25 @@ export class ListaDeCompraService {
   ]
 
   constructor() {
-    console.log('Instanciando dependências necessárias para o serviço.');
   }
 
   getListaDeCompra(){
     return this.listaDeCompra;
   }
 
+  editarItemLista(itemAntigo: Item, novoNome: string) {
+    let item: Item = {
+      id: itemAntigo.id,
+      nome: novoNome,
+      comprado: itemAntigo.comprado,
+      data: itemAntigo.data
+    }
+
+    this.listaDeCompra[Number(item.id)-1] = item;
+  }
+
   adicionarItemLista(nome: string) {
     this.listaDeCompra.push(this.criarItem(nome));
-    console.log("ADICIONADO")
   }
 
   criarItem(nome: string): Item {

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Item } from 'src/app/interfaces/iItem';
 import { ListaDeCompraService } from 'src/app/service/lista-de-compra.service';
 
 @Component({
@@ -7,14 +8,35 @@ import { ListaDeCompraService } from 'src/app/service/lista-de-compra.service';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css']
 })
-export class InputComponent implements OnInit {
+export class InputComponent implements OnInit, OnChanges {
+  @Input() itemParaSerEditado!: Item;
+
   input!: string;
+  editando: boolean = false;
+  textoBtn: string = "Salvar item";
+
+
   constructor(private listaCompraService: ListaDeCompraService) { }
 
   ngOnInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(!changes['itemParaSerEditado'].firstChange) {
+      this.editando = true;
+      this.textoBtn = "Editar item";
+      this.input = this.itemParaSerEditado?.nome
+    }
+  }
+
   adicionarItem() {
     this.listaCompraService.adicionarItemLista(this.input);
+  }
+
+  editarItem() {
+    this.listaCompraService.editarItemLista(this.itemParaSerEditado, this.input);
+    this.editando = false;
+    this.textoBtn = "Salvar item"
+    this.input = ""
   }
 }
