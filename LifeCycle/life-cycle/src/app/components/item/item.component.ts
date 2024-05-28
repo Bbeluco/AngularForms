@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Item } from 'src/app/interfaces/iItem';
+import { ListaDeCompraService } from 'src/app/service/lista-de-compra.service';
 
 @Component({
   selector: 'app-item',
@@ -13,13 +14,25 @@ export class ItemComponent implements OnInit {
   @Output() emitindoItemParaEditar = new EventEmitter();
 
   faPen = faPen;
-  faTrash = faTrash
+  faTrash = faTrash;
+  itemComprado = '';
 
-  constructor() { }
-
+  constructor(private listaDeCompraService: ListaDeCompraService) { }
+  
   ngOnInit(): void { }
 
   editarItem() {
     this.emitindoItemParaEditar.emit(this.item);
+  }
+
+  mudarEstadoItem() {
+    this.item.comprado = !this.item.comprado;
+    if(this.item.comprado) {
+      this.itemComprado = 'line-through'
+    } else {
+      this.itemComprado = ''
+    }
+
+    this.listaDeCompraService.editarItemLista(this.item, this.item.nome);
   }
 }

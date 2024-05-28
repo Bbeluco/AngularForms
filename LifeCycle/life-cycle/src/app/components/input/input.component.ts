@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Item } from 'src/app/interfaces/iItem';
 import { ListaDeCompraService } from 'src/app/service/lista-de-compra.service';
 
