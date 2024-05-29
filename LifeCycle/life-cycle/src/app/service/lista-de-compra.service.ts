@@ -47,4 +47,12 @@ export class ListaDeCompraService {
 
     return item;
   }
+
+  removerItem(id: number): void {
+    const idRemocao = this.listaDeCompra.findIndex(x => x.id === id);
+    console.log(this.listaDeCompra);
+    console.log(idRemocao);
+    this.listaDeCompra.splice(idRemocao, 1);
+    this.atualizarLocalStorage();
+  }
 }

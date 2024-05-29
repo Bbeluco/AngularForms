@@ -21,4 +21,8 @@ export class AppComponent implements OnInit {
   editarItem(item: Item) {
     this.itemParaEditar = item;
   }
+
+  removerItem(id: number) {
+    this.listaCompraService.removerItem(id);
+  }
 }

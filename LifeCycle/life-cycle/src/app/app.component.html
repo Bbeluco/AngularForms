@@ -5,7 +5,11 @@
       <h4 class="title-list">Lista de Compras</h4>
       <div *ngIf="listaItens.length > 0, else naoTemItem">
         <div *ngFor="let item of listaItens">
-          <app-item [item]="item" (emitindoItemParaEditar)="editarItem($event)"></app-item>
+          <app-item 
+            [item]="item" 
+            (emitindoItemParaEditar)="editarItem($event)"
+            (emitindoItemParaRemover)="removerItem($event)"
+          ></app-item>
         </div>
       </div>
       <ng-template #naoTemItem>

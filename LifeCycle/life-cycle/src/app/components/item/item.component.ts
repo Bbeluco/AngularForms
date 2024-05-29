@@ -12,6 +12,7 @@ export class ItemComponent implements OnInit {
 
   @Input() item!: Item
   @Output() emitindoItemParaEditar = new EventEmitter();
+  @Output() emitindoItemParaRemover = new EventEmitter();
 
   faPen = faPen;
   faTrash = faTrash;
@@ -34,5 +35,9 @@ export class ItemComponent implements OnInit {
     }
 
     this.listaDeCompraService.editarItemLista(this.item, this.item.nome);
+  }
+
+  removerItem() {
+    this.emitindoItemParaRemover.emit(this.item.id);
   }
 }

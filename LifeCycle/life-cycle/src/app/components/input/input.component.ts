@@ -30,6 +30,7 @@ export class InputComponent implements OnInit, OnChanges {
 
   adicionarItem() {
     this.listaCompraService.adicionarItemLista(this.input);
+    this.input = ""
   }
 
   editarItem() {
