@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Item, Livro } from 'src/app/models/interfaces';
+import { LivroVolumeInfo } from 'src/app/models/volumeInfo';
 import { LivroService } from 'src/app/services/livro.service';
 
 @Component({
@@ -28,20 +29,9 @@ export class ListaLivrosComponent implements OnDestroy {
   }
 
   converterAPIparaObjeto(items: Item[]) {
-    let livros: Livro[] = []
-
-    items.forEach(item => {
-      livros.push({
-        title: item.volumeInfo?.title,
-        authors: item.volumeInfo?.authors,
-        publisher: item.volumeInfo?.publisher,
-        publishedDate: item.volumeInfo?.publishedDate,
-        description: item.volumeInfo?.description,
-        thumbnail: item.volumeInfo?.imageLinks?.thumbnail
-      })
+    return items.map(item => {
+      return new LivroVolumeInfo(item);
     })
-
-    return livros;
   }
 
 }
